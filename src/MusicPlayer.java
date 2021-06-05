@@ -1,52 +1,85 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MusicPlayer {
-    public static void main(String[] args){
-      MusicPlayer play = new MusicPlayer();
-       play.createLibrary();
-       play.allArtists();
-
+    public static void main(String[] args) {
+        MusicPlayer play = new MusicPlayer();
+        play.createLibrary();
+        play.printArtists();
     }
 
-   public void allArtists() {
-      Artist sevyn = new Artist("Sevyn Streeter", "USA", "RnB/Pop", "21st Century");
-      sevyn.show();
+    public Artist[] createLibrary() {
 
-      Artist her = new Artist("H.E.R.", "USA", "RnB", "21st Century");
-      her.show();
+        TrumpetPlayer velvet = new TrumpetPlayer("Velvet Brown", "USA", "Classical", "21st Century", "Tuba");
+        velvet.show();
+        Song queen = new Song("Queen of the Night Aria", "The Smooth Hits", "https://youtu.be/_wWKyOnJfyk");
+        velvet.setSongMember(queen);
+        velvet.displaySongs();
+        System.out.println("\n");
 
-      TrumpetPlayer velvet = new TrumpetPlayer("Velvet Brown", "USA", "Classical", "21st Century", "Tuba");
-      velvet.show();
+        Vocalist rob = new Vocalist("Rob Thomas", "Germany/USA", "Punk Rock", "21st Century", "Fleetwood Mac");
+        rob.show();
+        Song smooth = new Song("Smooth", "The Smooth Hits", "https://youtu.be/6Whgn_iE5uc");
+        rob.setSongMember(smooth);
+        rob.displaySongs();
+        System.out.println("\n");
 
-      Vocalist jhene = new Vocalist("Jhene Aiko", "Germany/USA", "RnB", "21st Century", "John Mayer");
-      jhene.show();
+        Guitarist carlos = new Guitarist("Carlos Santana", "Mexico/USA", "Latin Rock", "21st Century", 6);
+        carlos.show();
+        Song oye = new Song("Oye Como Va", "The Smooth Hits", "https://youtu.be/J7ATTjg7tpE");
+        carlos.setSongMember(oye);
+        carlos.setSongMember(smooth);
+        carlos.displaySongs();
+        System.out.println("\n");
 
-      Guitarist carlos = new Guitarist("Carlos Santana", "Mexico/USA", "Latin Rock", "21st Century", 6);
-      carlos.show();
-   }
-   public void createLibrary(){
-      ArrayList<Song> library = new ArrayList<>();
-      Song smooth = new Song("Smooth", "The Smooth Hits", "https://youtu.be/6Whgn_iE5uc", "Rob Thomas","none" ,"Carlos Santana");
-      Song bs = new Song("BS", "The Smooth Hits"," https://www.youtube.com/watch?v=tXZ_B8Amy00", "Jhene Aiko/H.E.R", "none","none");
-      Song damage = new Song("Damage", "The Smooth Hits", "https://youtu.be/PAFAfhod9TU","H.E.R.", "none", "none");
-      Song queen = new Song("Queen of the Night Aria", "The Smooth Hits", "https://youtu.be/_wWKyOnJfyk", "Velvet Brown","Velvet Brown", "none");
-      Song kisses = new Song("Kissez", "The Smooth Hits", "https://www.youtube.com/watch?v=nNpASlGAgcI", "Sevyn Streeter", "none", "none");
+        Vocalist burning = new Vocalist("Burning Flames", "Antigua W.I.", "Soca", "21st Century", "Short Shirt");
+        burning.show();
+        Song engine = new Song("Swinging Engine", "Sweet Soca", "https://www.youtube.com/watch?v=V-P0Pbit4wQ");
+        burning.setSongMember(engine);
+        burning.displaySongs();
+        System.out.println("\n");
 
-      library.add(smooth);
-      library.add(bs);
-      library.add(damage);
-      library.add(queen);
-      library.add(kisses);
+        Vocalist jhene = new Vocalist("Jhene Aiko", "USA", "RnB", "21st Century", "John Mayer");
+        jhene.show();
+        Song bs = new Song("BS", "The Smooth Hits", "https://www.youtube.com/watch?v=tXZ_B8Amy00");
+        jhene.setSongMember(bs);
+        jhene.displaySongs();
+        System.out.println("\n");
 
-      for (Song song : library) {
-         System.out.println(" \n\t*******Music Library****** \n" +
-                 "  Song Title       | " + song.title + "\n" +
-                 "  Playlist Name    | " + song.playlist + "\n" +
-                 "  Website          | " + song.url + "\n" +
-                 "  Musician Name    | " + song.musician +"\n" +
-                 "  Trumpet Player   | " + song.trumpeter + "\n" +
-                 "  Guitarist        | " + song.guitarist);
-      }
-   }
+        Vocalist sevyn = new Vocalist("Sevyn Streeter", "USA", "RnB/Pop", "21st Century", "Stevie Wonder");
+        sevyn.show();
+        Song kisses = new Song("Kissez", "The Smooth Hits", "https://www.youtube.com/watch?v=nNpASlGAgcI");
+        sevyn.setSongMember(kisses);
+        sevyn.displaySongs();
+        System.out.println("\n");
+
+        Vocalist her = new Vocalist("H.E.R.", "USA", "RnB", "21st Century", "Stevie Wonder");
+        her.show();
+        Song damage = new Song("Damage", "The Smooth Hits", "https://youtu.be/PAFAfhod9TU");
+        her.setSongMember(damage);
+        her.setSongMember(bs);
+        her.displaySongs();
+        System.out.println("\n");
+
+        return new Artist[]{velvet,rob,carlos,burning,jhene,sevyn,her};
+    }
+
+    public void printArtists(){
+        ArrayList<Song> song_library = Artist.song_library;
+        Artist[] artists = createLibrary();
+
+        try {
+            PrintWriter pw = new PrintWriter("artistlist.txt");
+
+            for (int i = 0; i < song_library.size(); i++) {
+                pw.println(Arrays.toString(artists));
+            }
+            pw.close();
+        }  catch (Exception ex) {		// We’ll cover exceptions soon!
+            System.err.println("Couldn’t write the song info.");
+        }
+
+    }
 }
