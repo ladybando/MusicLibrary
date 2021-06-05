@@ -8,9 +8,10 @@ public class MusicPlayer {
         MusicPlayer play = new MusicPlayer();
         play.createLibrary();
         play.printArtists();
+
     }
 
-    public Artist[] createLibrary() {
+    public String[] createLibrary() {
 
         TrumpetPlayer velvet = new TrumpetPlayer("Velvet Brown", "USA", "Classical", "21st Century", "Tuba");
         velvet.show();
@@ -63,12 +64,12 @@ public class MusicPlayer {
         her.displaySongs();
         System.out.println("\n");
 
-        return new Artist[]{velvet,rob,carlos,burning,jhene,sevyn,her};
+        return new String[]{velvet.name,rob.name,carlos.name,burning.name,jhene.name,sevyn.name,her.name};
     }
 
     public void printArtists(){
         ArrayList<Song> song_library = Artist.song_library;
-        Artist[] artists = createLibrary();
+        String[] artists = createLibrary();
 
         try {
             PrintWriter pw = new PrintWriter("artistlist.txt");
@@ -77,7 +78,7 @@ public class MusicPlayer {
                 pw.println(Arrays.toString(artists));
             }
             pw.close();
-        }  catch (Exception ex) {		// We’ll cover exceptions soon!
+        }  catch (Exception ex) {
             System.err.println("Couldn’t write the song info.");
         }
 
