@@ -1,4 +1,6 @@
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Artist {
     String name;
@@ -6,6 +8,7 @@ public class Artist {
     String genre;
     String time_period;
     static ArrayList<Song> song_library;
+    ScanFile scanFile;
 
     public void setSongMember(Song songMember) {
         song_library.add(songMember);
@@ -16,6 +19,7 @@ public class Artist {
             song.show();
         }
     }
+    public Artist(ScanFile scanFile){}
 
     public Artist(String artist_name, String artist_countryOrigin, String artist_genre, String artist_time_period) {
         this.name = artist_name;

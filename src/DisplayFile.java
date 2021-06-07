@@ -10,8 +10,9 @@ public class DisplayFile {
             br = new BufferedReader(new java.io.FileReader("../NewArtist.txt"));
 
             while ((line = br.readLine()) != null) {
-               // line = br.readLine();
-                System.out.println(line);
+                String[] data = line.split(":");
+
+                System.out.println(data[0]);
             }
 
         } catch (Exception e) {    // We’ll cover exceptions soon

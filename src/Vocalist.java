@@ -6,7 +6,11 @@ public class Vocalist extends Artist{
         this.influencedBy = artist_influenced_by;
     }
 
-@Override
+    public Vocalist(ScanFile singer) {
+        super(singer);
+    }
+
+    @Override
     public void show() {
         System.out.println(
                 "\t----____ Vocalist ____----\n" +

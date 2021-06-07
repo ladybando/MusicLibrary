@@ -1,14 +1,15 @@
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class MusicPlayer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         MusicPlayer play = new MusicPlayer();
         play.createLibrary();
-        play.printArtists();
-
+        //play.printArtists();
+        play.addArtistFromFile();
     }
 
     public String[] createLibrary() {
@@ -69,7 +70,7 @@ public class MusicPlayer {
 
     public void printArtists(){
         ArrayList<Song> song_library = Artist.song_library;
-        String[] artists = createLibrary();
+        String[] artists = createLibrary();//get artists from createLibrary() method and add to array
 
         try {
             PrintWriter pw = new PrintWriter("artistlist.txt");
@@ -82,5 +83,22 @@ public class MusicPlayer {
             System.err.println("Couldn’t write the song info.");
         }
 
+    }
+
+    public void addArtistFromFile() throws FileNotFoundException {
+        ScanFile scanned = new ScanFile();//getting information scanned from file
+        String[] artist = scanned.scanArtist();//adding information to array to pull information from
+        //array pulled in all information into index 1
+        String name = artist[0].substring(1,8);//getting variables from array
+        String origin = artist[0].substring(9, 17);
+        String genre = artist[0].substring(18,25);
+        String time_period = artist[0].substring(26,38);
+        String influencedBy = artist[0].substring(39,45);
+
+        Vocalist riri = new Vocalist(name, origin, genre, time_period, influencedBy);//create new artist
+        riri.show();
+        Song camefor = new Song("This Is What You Came For", "Rihanna Hits", "https://youtu.be/kOkQ4T5WO9E");//create new song
+        riri.setSongMember(camefor);
+        riri.displaySongs();
     }
 }
