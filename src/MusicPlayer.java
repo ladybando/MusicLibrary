@@ -8,7 +8,7 @@ public class MusicPlayer {
     public static void main(String[] args) throws FileNotFoundException {
         MusicPlayer play = new MusicPlayer();
         play.createLibrary();
-        //play.printArtists();
+        play.printArtists();
         play.addArtistFromFile();
     }
 
@@ -73,7 +73,7 @@ public class MusicPlayer {
         String[] artists = createLibrary();//get artists from createLibrary() method and add to array
 
         try {
-            PrintWriter pw = new PrintWriter("artistlist.txt");
+            PrintWriter pw = new PrintWriter("C:\\Users\\ayana\\Desktop\\Android_Fellow\\artistlist.txt");
 
             for (int i = 0; i < song_library.size(); i++) {
                 pw.println(Arrays.toString(artists));
